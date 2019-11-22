@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mie.dao.StudentDao;
-import com.mie.model.Student;
+import com.mie.dao.UserDao;
+import com.mie.model.User;
 
 public class SearchController extends HttpServlet {
 	/**
@@ -24,15 +24,15 @@ public class SearchController extends HttpServlet {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static String SEARCH_USER = "/searchStudentResult.jsp";
-	private StudentDao dao;
+	private static String SEARCH_USER = "/searchUserResult.jsp";
+	private UserDao dao;
 
 	/**
 	 * Constructor for this class.
 	 */
 	public SearchController() {
 		super();
-		dao = new StudentDao();
+		dao = new UserDao();
 	}
 
 	protected void doPost(HttpServletRequest request,
@@ -45,9 +45,9 @@ public class SearchController extends HttpServlet {
 
 		RequestDispatcher view = request.getRequestDispatcher(SEARCH_USER);
 		request.setAttribute("keyword", keyword);
-		request.setAttribute("students", dao.getStudentByKeyword(keyword));
+		request.setAttribute("Users", dao.getUserByKeyword(keyword));
 		/**
-		 * Redirect to the search results page after the list of students
+		 * Redirect to the search results page after the list of Users
 		 * matching the keywords has been retrieved.
 		 */
 
