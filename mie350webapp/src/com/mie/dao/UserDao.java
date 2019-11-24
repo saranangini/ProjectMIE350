@@ -33,19 +33,21 @@ public class UserDao {
 		/**
 		 * This method adds a new User to the database.
 		 */
+		
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into Users(username,password,firstname,lastname,email,age,address,city,phoneNum) values (?, ?, ?, ?, ?, ?, ?, ?, ? )");
+					.prepareStatement("insert into Users(username,password,firstname,lastname,email,age,address,city,phoneNum,active) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 			// Parameters start with 1
 			preparedStatement.setString(1, User.getUsername());
 			preparedStatement.setString(2, User.getPassword());
 			preparedStatement.setString(3, User.getFirstName());
 			preparedStatement.setString(4, User.getLastName());
 			preparedStatement.setString(5, User.getEmail());
-			preparedStatement.setInt(6, User.getAge());
+			preparedStatement.setString(4, String.valueOf(User.getAge()));
 			preparedStatement.setString(7, User.getAddress());
 			preparedStatement.setString(8, User.getCity());
-			preparedStatement.setInt(9, User.getPhoneNum());
+			preparedStatement.setString(7, String.valueOf(User.getPhoneNum()));
+			preparedStatement.setString(10, "true");
 			
 			preparedStatement.executeUpdate();
 
@@ -54,16 +56,22 @@ public class UserDao {
 		}
 	}
 
-	public void deleteUser(String username) {
+	public void deleteUser(User User) { //this used to take in String username so will probably break something (watch out!)
 		/**
-		 * This method deletes a User from the database.
+		 * This method sets a user's activity status to false.
 		 */
+		
+		User.setActive(false);
 		try {
-			PreparedStatement preparedStatement = connection
+/*			PreparedStatement preparedStatement = connection
 					.prepareStatement("delete from Users where username=?");
 			// Parameters start with 1
 			preparedStatement.setString(1, username);
-			preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();*/
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("update Users set active=? where username =?");
+			preparedStatement.setString(1, String.valueOf(User.getActive()));
+			preparedStatement.setString(2, User.getUsername());
 
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -83,10 +91,10 @@ public class UserDao {
 			preparedStatement.setString(1, User.getFirstName());
 			preparedStatement.setString(2, User.getLastName());
 			preparedStatement.setString(3, User.getEmail());
-			preparedStatement.setInt(4, User.getAge());
+			preparedStatement.setString(4, String.valueOf(User.getAge()));
 			preparedStatement.setString(5, User.getAddress());
 			preparedStatement.setString(6, User.getCity());
-			preparedStatement.setInt(7, User.getPhoneNum());
+			preparedStatement.setString(7, String.valueOf(User.getPhoneNum()));
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -113,6 +121,7 @@ public class UserDao {
 				User.setAddress(rs.getString("address"));
 				User.setCity(rs.getString("city"));
 				User.setPhoneNum(rs.getInt("phoneNum"));
+				User.setActive(parseBoolean(rs.getString("active"))); //why doesn't this work fuck you
 				
 				Users.add(User);
 			}

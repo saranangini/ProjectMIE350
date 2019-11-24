@@ -61,7 +61,7 @@ public class UserController extends HttpServlet {
 
 		if (action.equalsIgnoreCase("delete")) {
 			String username = request.getParameter("username");
-			dao.deleteUser(username);
+			dao.deleteUser(username); //change to take a user as opposed to a username OR adjust deleteUser to take a username again (call User object in 
 			forward = LIST_User_ADMIN;
 			request.setAttribute("Users", dao.getAllUsers());
 		} else if (action.equalsIgnoreCase("insert")) {
@@ -142,7 +142,7 @@ public class UserController extends HttpServlet {
 		
 		
 		
-		*/*/
+		*/
 		/**
 		 * Once the User has been added or updated, the page will redirect to
 		 * the listing of Users.

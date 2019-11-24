@@ -11,6 +11,7 @@ public class User extends Member{
 	private String address;
 	private String city;
 	private int phoneNum;
+	private boolean active;
 	
 	public User(){
 		this.admin=false;
@@ -79,6 +80,14 @@ public class User extends Member{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public boolean getActive(){
+		return active;
+	}
+	
+	public void setActive(boolean Active){
+		this.active = Active;
 	}
 
 	@Override

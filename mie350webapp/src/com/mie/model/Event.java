@@ -1,6 +1,6 @@
 package com.mie.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Event {
 
@@ -22,7 +22,7 @@ public class Event {
 	public String getEventName(){
 		return eventName;
 	}
-	
+
 	public void setEventName(String EventName){
 		this.eventName = EventName;
 	}
