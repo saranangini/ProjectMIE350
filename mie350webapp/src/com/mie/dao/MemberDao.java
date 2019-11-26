@@ -11,7 +11,6 @@ import java.util.List;
 import com.mie.util.DbUtil;
 import com.mie.model.*;
 import com.mie.controller.*;
-
 import com.mie.util.*;
 
 public class MemberDao {
@@ -22,6 +21,28 @@ public class MemberDao {
 	 */
 	static Connection currentCon = null;
 	static ResultSet rs = null;
+
+public static boolean userExists(String username) {
+		
+		String searchQuery = "Select * from members where username='" + username + "'";
+		Statement stmt = null;
+
+		try {
+			// connect to DB
+			currentCon = DbUtil.getConnection();
+			stmt = currentCon.createStatement();
+			rs = stmt.executeQuery(searchQuery);
+			return(rs.next());
+		}
+
+		catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! "
+					+ ex);
+			return(false);
+		}
+		
+	}
+	
 
 	public static Member login(Member member) {
 
@@ -80,7 +101,17 @@ public class MemberDao {
 		/**
 		 * Return the Member object.
 		 */
-		return member;
+		if (member instanceof User){
+			return (User)member;
+		}
+		else if (member instanceof Admin){
+			return (Admin)member;
+		}
+		
+		else{
+			System.out.println("Sorry! Something went wrong!");
+			return member;											//this is bad. pls confirm member will be User or Admin
+		}
 
 	}
 }

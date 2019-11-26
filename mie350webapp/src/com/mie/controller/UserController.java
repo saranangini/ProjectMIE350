@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.mie.dao.MemberDao;
 import com.mie.dao.UserDao;
 import com.mie.model.User;
 
@@ -59,16 +60,16 @@ public class UserController extends HttpServlet {
 		String action = request.getParameter("action");
 
 		if (action.equalsIgnoreCase("delete")) {
-			int UserId = Integer.parseInt(request.getParameter("UserId"));
-			dao.deleteUser(UserId);
+			String username = request.getParameter("username");
+			dao.deleteUser(username); //change to take a user as opposed to a username OR adjust deleteUser to take a username again (call User object in 
 			forward = LIST_User_ADMIN;
 			request.setAttribute("Users", dao.getAllUsers());
 		} else if (action.equalsIgnoreCase("insert")) {
 			forward = INSERT;
 		} else if (action.equalsIgnoreCase("edit")) {
 			forward = EDIT;
-			int UserId = Integer.parseInt(request.getParameter("UserId"));
-			User User = dao.getUserById(UserId);
+			String username = request.getParameter("username");
+			User User = dao.getUserByUsername(username);
 			request.setAttribute("User", User);
 		} else if (action.equalsIgnoreCase("listUser")) {
 			forward = LIST_User_PUBLIC;
@@ -92,23 +93,42 @@ public class UserController extends HttpServlet {
 		 * the addUser.jsp or the editUser.jsp pages.
 		 */
 		User User = new User();
+		
+		User.setFirstName(request.getParameter("firstname"));
+		User.setLastName(request.getParameter("lastname"));
+		User.setEmail(request.getParameter("email"));
+		User.setAge(Integer.parseInt(request.getParameter("age")));
+		User.setAddress(request.getParameter("address"));
+		User.setCity(request.getParameter("city"));
+		User.setPhoneNum(Integer.parseInt(request.getParameter("phoneNum")));
+		
+		String username  = request.getParameter("username");
+		
+		if (MemberDao.userExists(username)== false){
+			dao.addUser(User);
+		}
+		else {
+			User.setUsername(username);
+			dao.updateUser(User);
+		}
+/*		
 		User.setFirstName(request.getParameter("firstName"));
 		User.setLastName(request.getParameter("lastName"));
-/*		try {
+		try {
 			Date dob = new SimpleDateFormat("MM/dd/yyyy").parse(request
 					.getParameter("dob"));
 			User.setDob(dob);
 		} catch (ParseException e) {
 			e.printStackTrace();
-		}*/
+		}
 		User.setEmail(request.getParameter("email"));
 		String Userid = request.getParameter("Userid");
-		/**
+		*//**
 		 * If the 'Userid' field in the form is empty, the new User will
 		 * be added to the list of User objects.
-		 */
+		 *//*
 		
-/*		if (Userid == null || Userid.isEmpty()) {
+		if (Userid == null || Userid.isEmpty()) {
 			dao.addUser(User);
 		} else {
 			*//**
@@ -118,11 +138,11 @@ public class UserController extends HttpServlet {
 			 *//*
 			User.setUserid(Integer.parseInt(Userid));
 			dao.updateUser(User);
-		}*/
+		}
 		
 		
 		
-		
+		*/
 		/**
 		 * Once the User has been added or updated, the page will redirect to
 		 * the listing of Users.

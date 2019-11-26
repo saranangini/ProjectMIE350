@@ -15,9 +15,6 @@ public class Member {
 	protected boolean valid; //if the accnt exists
 	protected boolean admin; //if member
 	
-	public Member(){
-		this.admin=true;
-	}
 	
 	//public int getMemberid() {
 
@@ -79,7 +76,6 @@ public class Member {
 	public void setAdmin(boolean newAdmin){ //new admin will tell if login is admin
 		admin=newAdmin;
 	}
-	
 	
 	public boolean isAdmin(){
 		return admin;
