@@ -61,22 +61,30 @@ public class UserController extends HttpServlet {
 
 		if (action.equalsIgnoreCase("delete")) {
 			String username = request.getParameter("username");
-			dao.deleteUser(username); //change to take a user as opposed to a username OR adjust deleteUser to take a username again (call User object in 
+			User User = dao.getUserByUsername(username);
+			dao.deleteUser(User); //change to take a user as opposed to a username OR adjust deleteUser to take a username again (call User object in 
+			//hi tanishq here -- i think i fixed what you were concerned about by adding the line above it
+			
 			forward = LIST_User_ADMIN;
 			request.setAttribute("Users", dao.getAllUsers());
+		
 		} else if (action.equalsIgnoreCase("insert")) {
 			forward = INSERT;
+		
 		} else if (action.equalsIgnoreCase("edit")) {
 			forward = EDIT;
 			String username = request.getParameter("username");
 			User User = dao.getUserByUsername(username);
 			request.setAttribute("User", User);
+		
 		} else if (action.equalsIgnoreCase("listUser")) {
 			forward = LIST_User_PUBLIC;
 			request.setAttribute("Users", dao.getAllUsers());
+		
 		} else if (action.equalsIgnoreCase("listUserAdmin")) {
 			forward = LIST_User_ADMIN;
 			request.setAttribute("Users", dao.getAllUsers());
+		
 		} else {
 			forward = INSERT;
 		}

@@ -14,7 +14,7 @@ import com.mie.dao.*;
  * Servlet implementation for LoginController.
  * 
  * This class handles the login servlet and assigns session attributes for users
- * who succesfully log into the system.
+ * who successfully log into the system.
  */
 public class LoginController extends HttpServlet {
 
@@ -48,7 +48,7 @@ public class LoginController extends HttpServlet {
 				/**
 				 * Redirect to the members-only home page.
 				 */
-				response.sendRedirect("memberLogged.jsp");
+				response.sendRedirect("memberLogged.jsp"); //oh hey this is where we can redirect different types of people who login
 
 				/**
 				 * Set a timeout variable of 900 seconds (15 minutes) for this

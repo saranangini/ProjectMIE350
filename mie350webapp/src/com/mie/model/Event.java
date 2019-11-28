@@ -1,6 +1,7 @@
 package com.mie.model;
 
 import java.util.Date;
+//probably made tiny changes here so just copy this over to be sure
 
 public class Event {
 
@@ -10,6 +11,15 @@ public class Event {
 	private Date eventDate;
 	private String donationType;
 	private String city;
+	private String response;
+	
+	public String getResponse(){
+		return response;
+	}
+	
+	public void setResponse(String Response){
+		response=Response;
+	}
 	
 	public int getEventID(){
 		return eventID;

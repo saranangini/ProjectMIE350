@@ -14,7 +14,7 @@ public class User extends Member{
 	private boolean active;
 	
 	public User(){
-		this.admin=false;
+		this.admin="false";
 	}
 	//add address 
 	//add valid 

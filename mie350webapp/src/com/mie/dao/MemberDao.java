@@ -12,7 +12,7 @@ import com.mie.util.DbUtil;
 import com.mie.model.*;
 import com.mie.controller.*;
 import com.mie.util.*;
-
+//probably made tiny changes here so just copy this over to be sure
 public class MemberDao {
 
 	/**

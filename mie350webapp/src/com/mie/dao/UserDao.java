@@ -1,4 +1,4 @@
-package com.mie.dao;
+ package com.mie.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -34,29 +34,52 @@ public class UserDao {
 		 * This method adds a new User to the database.
 		 */
 		
-		try {
-			PreparedStatement preparedStatement = connection
-					.prepareStatement("insert into Users(username,password,firstname,lastname,email,age,address,city,phoneNum,active) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-			// Parameters start with 1
-			preparedStatement.setString(1, User.getUsername());
-			preparedStatement.setString(2, User.getPassword());
-			preparedStatement.setString(3, User.getFirstName());
-			preparedStatement.setString(4, User.getLastName());
-			preparedStatement.setString(5, User.getEmail());
-			preparedStatement.setString(4, String.valueOf(User.getAge()));
-			preparedStatement.setString(7, User.getAddress());
-			preparedStatement.setString(8, User.getCity());
-			preparedStatement.setString(7, String.valueOf(User.getPhoneNum()));
-			preparedStatement.setString(10, "true");
+		//OKAY SOMEHOW we need to make it loop back to ask the person to re-enter their info
+		if (getUsernames(getAllUsers()).contains(User.getUsername())){
 			
-			preparedStatement.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("This username already exists, pick a new one my guy"); //NOT SURE IF THIS WORKS
+		
+		} else{
+			try {
+				
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("insert into Users(username,password,firstname,lastname,email,age,address,city,phoneNum,active) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				// Parameters start with 1
+				preparedStatement.setString(1, User.getUsername());
+				preparedStatement.setString(2, User.getPassword());
+				preparedStatement.setString(3, User.getFirstName());
+				preparedStatement.setString(4, User.getLastName());
+				preparedStatement.setString(5, User.getEmail());
+				preparedStatement.setString(4, String.valueOf(User.getAge()));
+				preparedStatement.setString(7, User.getAddress());
+				preparedStatement.setString(8, User.getCity());
+				preparedStatement.setString(7, String.valueOf(User.getPhoneNum()));
+				preparedStatement.setString(10, "true");
+				
+				preparedStatement.executeUpdate();
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
+	}
+	
+	
+	public List<String> getUsernames(List<User> userlist){ //this is gross i know im sorry but lemme know if theres a better way
+		
+		List<String> usernamelist = new ArrayList<String>();
+		
+		for (User u:userlist){
+			usernamelist.add(u.getUsername());
+		}
+	
+		return usernamelist;
+		
 	}
 
 	public void deleteUser(User User) { //this used to take in String username so will probably break something (watch out!)
+		//hi tanishq here -- yeah it limits the functionality of deleteUser in UserController
+		//
 		/**
 		 * This method sets a user's activity status to false.
 		 */
@@ -84,7 +107,7 @@ public class UserDao {
 		 */
 		try {
 			PreparedStatement preparedStatement = connection
-					.prepareStatement("update Users set firstname=?, lastname=?, email=?, age=?, address=?, city=?, phoneNum=?"
+					.prepareStatement("update Users set firstname=?, lastname=?, email=?, age=?, password=?, address=?, city=?, phoneNum=?"
 							+ " where username=?");
 			// Parameters start with 1
 			
@@ -95,6 +118,7 @@ public class UserDao {
 			preparedStatement.setString(5, User.getAddress());
 			preparedStatement.setString(6, User.getCity());
 			preparedStatement.setString(7, String.valueOf(User.getPhoneNum()));
+			preparedStatement.setString(8, User.getPassword());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -121,7 +145,8 @@ public class UserDao {
 				User.setAddress(rs.getString("address"));
 				User.setCity(rs.getString("city"));
 				User.setPhoneNum(rs.getInt("phoneNum"));
-				User.setActive(parseBoolean(rs.getString("active"))); //why doesn't this work fuck you
+				User.setActive(Boolean.parseBoolean(rs.getString("active"))); //why doesn't this work fuck you -- IT DOES NOW
+				
 				
 				Users.add(User);
 			}
@@ -145,7 +170,6 @@ public class UserDao {
 					.prepareStatement("select * from Users where Userid=?");
 			preparedStatement.setInt(1, Userid);
 			ResultSet rs = preparedStatement.executeQuery();
-
 			if (rs.next()) {
 				//User.setUserid(rs.getInt("Userid"));
 				User.setFirstName(rs.getString("firstname"));
@@ -156,7 +180,6 @@ public class UserDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
 		return User;
 	}*/
 
@@ -211,6 +234,7 @@ public class UserDao {
 				User.setAddress(rs.getString("address"));
 				User.setCity(rs.getString("city"));
 				User.setPhoneNum(rs.getInt("phoneNum"));
+				
 				Users.add(User);
 			}
 		} catch (SQLException e) {
