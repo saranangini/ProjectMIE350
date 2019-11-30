@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
-	pageEncoding="EUC-KR" import="com.mie.model.*"%>
+	pageEncoding="EUC-KR"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html lang="en">
 <head>
-<title>MIE350 Sample Web App - Invalid Login!</title>
+<title>MIE350 Sample Web App - Login</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -31,16 +31,20 @@
 		<div class="row content">
 			<div class="col-sm-2 sidenav">
 				<!-- You can put left sidebar links here if you want to. -->
-
 			</div>
 			<div class="col-sm-8 text-left">
+				<h1>User Login</h1>
 
-				<h1>Invalid Login</h1>
+				<form action="UserLoginController">
 
-				Please double-check your credentials and log in again.
-				<br><a href="userLogin.jsp"> Try Again (User) </a>
-				<br><a href="adminLogin.jsp"> Try Again (Admin) </a>
+					Username: <input type="text" name="un" /><br> Password: <input
+						type="password" name="pw" /> <input type="submit"
+						class="btn btn-info" value="Submit">
 
+				</form>
+				<br /> 
+				<a href="adminLogin.jsp"> Admin LogIn </a>
+				
 			</div>
 			<div class="col-sm-2 sidenav">
 				<!-- You can put right sidebar links here if you want to. -->
@@ -49,7 +53,6 @@
 	</div>
 
 	<%@ include file="footer.jsp"%>
-
 
 </body>
 </html>

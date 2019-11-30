@@ -14,7 +14,7 @@ public class Member {
 	protected String password;
 	protected String email;
 	protected boolean valid; //if the accnt exists
-	protected String admin; //if member
+	protected boolean admin; //if member
 	
 	
 	//public int getMemberid() {
@@ -74,11 +74,11 @@ public class Member {
 		valid = newValid;
 	}
 	
-	public void setAdmin(String newAdmin){ //new admin will tell if login is admin
+	public void setAdmin(boolean newAdmin){ //new admin will tell if login is admin
 		admin=newAdmin;
 	}
 	
-	public String isAdmin(){
+	public boolean isAdmin(){
 		return admin;
 	}
 

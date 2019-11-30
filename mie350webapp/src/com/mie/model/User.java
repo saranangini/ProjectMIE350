@@ -10,11 +10,11 @@ public class User extends Member{
 	private int age;
 	private String address;
 	private String city;
-	private int phoneNum;
+	private String phoneNum;
 	private boolean active;
 	
 	public User(){
-		this.admin="false";
+		this.admin=false;
 	}
 	//add address 
 	//add valid 
@@ -42,11 +42,11 @@ public class User extends Member{
 		this.city=City;
 	}
 	
-	public void setPhoneNum(int PhoneNum){
+	public void setPhoneNum(String PhoneNum){
 		this.phoneNum=PhoneNum;
 	}
 	
-	public int getPhoneNum(){
+	public String getPhoneNum(){
 		return phoneNum;
 	}
 	

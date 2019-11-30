@@ -9,13 +9,13 @@
 	</welcome-file-list>
 	<servlet>
 		<description></description>
-		<display-name>StudentController</display-name>
-		<servlet-name>StudentController</servlet-name>
-		<servlet-class>com.mie.controller.StudentController</servlet-class>
+		<display-name>UserController</display-name>
+		<servlet-name>UserController</servlet-name>
+		<servlet-class>com.mie.controller.UserController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>StudentController</servlet-name>
-		<url-pattern>/StudentController</url-pattern>
+		<servlet-name>UserController</servlet-name>
+		<url-pattern>/UserController</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>
@@ -29,13 +29,13 @@
 	</servlet-mapping>
 	<servlet>
 		<description></description>
-		<display-name>LoginController</display-name>
-		<servlet-name>LoginController</servlet-name>
-		<servlet-class>com.mie.controller.LoginController</servlet-class>
+		<display-name>UserLoginController</display-name>
+		<servlet-name>UserLoginController</servlet-name>
+		<servlet-class>com.mie.controller.UserLoginController</servlet-class>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>LoginController</servlet-name>
-		<url-pattern>/LoginController</url-pattern>
+		<servlet-name>UserLoginController</servlet-name>
+		<url-pattern>/UserLoginController</url-pattern>
 	</servlet-mapping>
 	<servlet>
 		<description></description>
@@ -50,4 +50,22 @@
 	<session-config>
 		<session-timeout>15</session-timeout>
 	</session-config>
+	<servlet>
+		<display-name>SignUpController</display-name>
+		<servlet-name>SignUpController</servlet-name>
+		<servlet-class>com.mie.controller.SignUpController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>SignUpController</servlet-name>
+		<url-pattern>/SignUpController</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<display-name>AdminLoginController</display-name>
+		<servlet-name>AdminLoginController</servlet-name>
+		<servlet-class>com.mie.controller.AdminLoginController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>AdminLoginController</servlet-name>
+		<url-pattern>/AdminLoginController</url-pattern>
+	</servlet-mapping>
 </web-app>

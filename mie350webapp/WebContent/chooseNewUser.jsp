@@ -35,11 +35,11 @@
 			</div>
 			<div class="col-sm-8 text-left">
 
-				<h1>Invalid Login</h1>
+				<h1>Sorry!</h1>
+			
 
-				Please double-check your credentials and log in again.
-				<br><a href="userLogin.jsp"> Try Again (User) </a>
-				<br><a href="adminLogin.jsp"> Try Again (Admin) </a>
+				 This username is already taken. Please choose a new username and <a href="signup.jsp"> try again.
+
 
 			</div>
 			<div class="col-sm-2 sidenav">

@@ -14,7 +14,6 @@ import com.mie.model.Member;
 import com.mie.model.Charity;
 import com.mie.model.Charity;
 import com.mie.util.DbUtil;
-//probably made tiny changes here so just copy this over to be sure
 
 public class CharityDao {
 	

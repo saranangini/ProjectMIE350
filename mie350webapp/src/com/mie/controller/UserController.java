@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.mie.dao.MemberDao;
 import com.mie.dao.UserDao;
 import com.mie.model.User;
 
@@ -108,11 +107,11 @@ public class UserController extends HttpServlet {
 		User.setAge(Integer.parseInt(request.getParameter("age")));
 		User.setAddress(request.getParameter("address"));
 		User.setCity(request.getParameter("city"));
-		User.setPhoneNum(Integer.parseInt(request.getParameter("phoneNum")));
+		User.setPhoneNum(request.getParameter("phoneNum"));
 		
 		String username  = request.getParameter("username");
 		
-		if (MemberDao.userExists(username)== false){
+		if (UserDao.userExists(username)== false){
 			dao.addUser(User);
 		}
 		else {
