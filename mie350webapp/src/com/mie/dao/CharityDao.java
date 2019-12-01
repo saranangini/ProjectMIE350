@@ -11,6 +11,7 @@ import java.util.List;
 import com.mie.model.Admin;
 import com.mie.model.Charity;
 import com.mie.model.Member;
+import com.mie.model.User;
 import com.mie.model.Charity;
 import com.mie.model.Charity;
 import com.mie.util.DbUtil;
@@ -23,12 +24,38 @@ public class CharityDao {
 	
 	
 	private Connection connection;
+	static Connection currentCon = null;
+	static ResultSet rs = null;
 
 	public CharityDao() {
 		/**
 		 * Get the database connection.
 		 */
 		connection = DbUtil.getConnection();
+	}
+	
+	public void deleteCharity(Charity Charity) { //this used to take in String username so will probably break something (watch out!)
+		//hi tanishq here -- yeah it limits the functionality of deleteUser in UserController
+		//
+		/**
+		 * This method sets a user's activity status to false.
+		 */
+		
+		//.setActive(false);
+		try {
+/*			PreparedStatement preparedStatement = connection
+					.prepareStatement("delete from Users where username=?");
+			// Parameters start with 1
+			preparedStatement.setString(1, username);
+			preparedStatement.executeUpdate();*/
+			
+			PreparedStatement preparedStatement = connection.prepareStatement("update Users set active=? where username =?");
+			//preparedStatement.setString(1, String.valueOf(User.getActive()));
+			preparedStatement.setString(2, Charity.getCharityName());
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Charity> getAllCharities() {
@@ -63,6 +90,59 @@ public class CharityDao {
 		return Charities;
 	}
 	
+public static boolean charityExists(int charityid) {
+		
+		String searchQuery = "Select * from Charities where charityID='" + charityid + "'";
+		Statement stmt = null;
+
+		try {
+			// connect to DB
+			currentCon = DbUtil.getConnection();
+			stmt = currentCon.createStatement();
+			rs = stmt.executeQuery(searchQuery);
+			return(rs.next());
+		}
+
+		catch (Exception ex) {
+			System.out.println("Log In failed: An Exception has occurred! "
+					+ ex);
+			return(false);
+		}
+		
+	}
+
+	public void addCharity(Charity Charity) {
+		/**
+		 * This method adds a new User to the database.
+		 */
+		
+		//OKAY SOMEHOW we need to make it loop back to ask the person to re-enter their info
+		/*if (getUsernames(getAllUsers()).contains(User.getUsername())){
+			
+			System.out.println("Dude this username already exists, pick a new one my guy"); //NOT SURE IF THIS WORKS
+		
+		} else{*/
+			try {
+				
+				PreparedStatement preparedStatement = connection
+						.prepareStatement("insert into Users(username,password,firstname,lastname,email,age,address,phoneNum,active) values (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+				// Parameters start with 1
+				preparedStatement.setInt(1, Charity.getCharityID());
+				preparedStatement.setString(2, Charity.getCharityName());
+				preparedStatement.setString(3, Charity.getCharityCategory());
+				preparedStatement.setString(4, Charity.getCity());
+				preparedStatement.setString(5, Charity.getAddress());
+				preparedStatement.setString(6, Charity.getHours());
+				preparedStatement.setInt(7, Charity.getPhoneNum());
+				
+				
+				preparedStatement.executeUpdate();
+	
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	
 	public Charity getCharityByCharityname(String CharityName) {
 
 		Charity Charity = new Charity();
@@ -86,6 +166,28 @@ public class CharityDao {
 		}
 
 		return Charity;
+	}
+	
+	public void updateCharity(Charity Charity) {
+		/**
+		 * This method updates a User's information into the database.
+		 */
+		try {
+			PreparedStatement preparedStatement = connection
+					.prepareStatement("update Users set firstname=?, lastname=?, email=?, age=?, address=?, phoneNum=?"
+							+ " where username=?");
+			// Parameters start with 1
+			
+			preparedStatement.setString(1, Charity.getCharityName());
+			preparedStatement.setString(2, Charity.getCharityCategory());
+			preparedStatement.setString(3,Charity.getCity());
+			preparedStatement.setString(4, Charity.getAddress());
+			preparedStatement.setString(5, Charity.getHours());
+			preparedStatement.setString(7, String.valueOf(Charity.getPhoneNum()));
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Charity> getCharityByKeyword(String keyword) {

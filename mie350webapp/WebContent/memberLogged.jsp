@@ -63,9 +63,9 @@
 				Members can do the following:
 
 				<ul>
-					<li><b>Add</b> students</li>
-					<li><b>Delete</b> students</li>
-					<li><b>Modify</b> student information</li>
+					<li><b>Add</b> users</li>
+					<li><b>Delete</b> users</li>
+					<li><b>Modify</b> user information</li>
 				</ul>
 
 

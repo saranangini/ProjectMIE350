@@ -1,5 +1,4 @@
-
-	package com.mie.dao;
+package com.mie.dao;
 
 	import java.sql.Connection;
 	import java.sql.PreparedStatement;
@@ -76,4 +75,3 @@
 		
 		
 	}
-

@@ -13,7 +13,7 @@
 				<li><a href="index.jsp">Home</a></li>
 				<li><a href="about.jsp">About</a></li>
 				<li><a
-					href="/mie350webapp/StudentController?action=listStudent">Charity List</a></li>
+					href="/mie350webapp/CharityController?action=listCharity">Charity List</a></li> 
 				<li><a href="searchStudent.jsp">Find an Event</a></li>
 				<li class="dropdown"><a data-toggle="dropdown"
 					href="helpful_links.jsp">Other Links<b class="caret"></b></a>

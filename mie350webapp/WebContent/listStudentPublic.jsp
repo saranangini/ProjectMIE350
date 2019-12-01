@@ -6,7 +6,7 @@
 
 <html lang="en">
 <head>
-<title>MIE350 Sample Web App - All Students in DB</title>
+<title>MIE350 Sample Web App - All Charities in DB</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet"
@@ -35,41 +35,50 @@
 				<!-- You can put left sidebar links here if you want to. -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>All Students In Database</h1>
+				<h1>All Charities In Database</h1>
 
 				The time is now <b><%=new java.util.Date()%></b>.<br> <br>
 
-				The following student information is displayed:
+				The following Charity information is displayed:
 				<ul>
-					<li>Student ID</li>
-					<li>First Name</li>
-					<li>Last Name</li>
-					<li>Email</li>
+					<li>Charity ID</li>
+					<li>Charity Name</li>
+					<li>Charity Category</li>
+					<li>City</li>
+					<li>Address</li>
+					<li>Hours</li>
+					<li>Phone Num</li>
 				</ul>
 				Due to privacy concerns, students' dates of birth (DOB) <u>are
 					not</u> shown.<br /> <br /> The following <B><c:out
-						value="${students.size()}" /> students</B> are in your database (you
-				can click on the table headings to sort the students): <br /> <br />
+						value="${charity.size()}" /> charities</B> are in your database (you
+				can click on the table headings to sort the charities): <br /> <br />
 
 				<table border=1 class="sortable">
 					<thead>
 						<tr>
-							<th>Student Id</th>
-							<th>First Name</th>
-							<th>Last Name</th>
+							<th>Charity Id</th>
+							<th>Charity Name</th>
+							<th>Charity Category</th>
+							<th>City</th>
+							<th>Address</th>
+							<th>Hours</th>
 							<!-- th>DOB</th -->
-							<th>Email</th>
+							<th>Phone Num</th>
 						</tr>
 					</thead>
 					<tbody>
-						<c:forEach items="${students}" var="student">
+						<c:forEach items="${charities}" var="charities">
 							<tr>
-								<td align="center"><c:out value="${student.getStudentid()}" /></td>
-								<td align="center"><c:out value="${student.getFirstName()}" /></td>
-								<td align="center"><c:out value="${student.getLastName()}" /></td>
+								<td align="center"><c:out value="${charity.getCharityID()}" /></td>
+								<td align="center"><c:out value="${charity.getCharityName()}" /></td>
+								<td align="center"><c:out value="${charity.getCharityCategory()}" /></td>
+								<td align="center"><c:out value="${charity.getCity()}" /></td>
+								<td align="center"><c:out value="${charity.getAddress()}" /></td>
+								<td align="center"><c:out value="${charity.getHours()}" /></td>
 								<!--td align="center"><fmt:formatDate pattern="yyyy-MMM-dd"
 										value="${student.getDob()}" /></td-->
-								<td align="center"><c:out value="${student.getEmail()}" /></td>
+								<td align="center"><c:out value="${charity.getPhoneNum()}" /></td>
 
 							</tr>
 						</c:forEach>

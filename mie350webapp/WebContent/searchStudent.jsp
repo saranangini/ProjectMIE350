@@ -42,15 +42,15 @@
 				<!-- You can put left sidebar links here if you want to. -->
 			</div>
 			<div class="col-sm-8 text-left">
-				<h1>Search A Student</h1>
+				<h1>Search An Event</h1>
 
-				Type in any keyword to search for student information (last name,
+				Type in any keyword to search for event information (last name,
 				first name, email) that matches the keyword. <Br />
 				<Br />
 				<center>
 					<form method="POST" action='SearchController' name="frmAddUser">
 						Keyword: <input type="text" name="keyword"
-							value="<c:out value="${student.searchword}" />"><input
+							value="<c:out value="${event.searchword}" />"><input
 							type="submit" class="btn btn-info" value="Submit" />
 					</form>
 				</center>

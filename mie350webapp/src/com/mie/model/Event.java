@@ -10,19 +10,11 @@ public class Event {
 	private Date eventDate;
 	private String donationType;
 	private String city;
-	private String response;
 	
 	public int getEventID(){
 		return eventID;
 	}
 	
-	public void setResponse(String Response){
-		response=Response;
-	}
-	
-	public String getResponse(){
-		return response;
-	}
 	public void setEventID(int EventID){
 		this.eventID = EventID;
 	}
